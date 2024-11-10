@@ -1,0 +1,103 @@
+// Задание 1
+
+const myArray = [10, 20, 30, 40, 50];
+const getIndex = (arr, index) => arr[index];
+console.log(getIndex(myArray, 2));
+
+// Задание 2
+
+function getWeather(code, decode){
+    switch (code) {
+        case 'SQ':
+            return decode('SQ');
+        case  'PO':
+            return decode('PO');
+        case  'FC':
+            return decode('FC');
+        case  'BR':
+            return decode('BR');
+        case 'HZ':
+            return decode('HZ');
+        case 'FU':
+            return decode('FU');
+        case 'DS':
+            return decode('DS');
+        case 'SS':
+            return decode('SS');
+        default:
+            return 'Код погоды неизвестен';
+    }
+}
+
+function decode(code) {
+    const  descriptions = {
+        SQ: 'шквал',
+        PO: 'пыльный вихрь',
+        FC: 'торнадо',
+        BR: 'дымка (видимость от 1 до 9 км)',
+        HZ: 'мгла (видимость менее 10 км)',
+        FU: 'дым (видимость менее 10 км)',
+        DS: 'пыльная буря (видимость менее 10 км)',
+        SS: 'песчаная буря (видимость менее 10 км)'
+    };
+    return descriptions[code] || 'Описание отсутствует';
+}
+
+console.log(getWeather('FC', decode));
+
+// // ЦИКЛЫ
+
+for (let i = 0; i <= 20; i++) {
+    console.log(i);
+}
+
+for (let i = 15; i <= 96; i = i + 3) {
+    console.log(i);
+}
+
+for (let i = 96; i >= 15; i = i - 3) {
+    console.log(i);
+}
+
+for (let i = 100; i >= 57; i--) {
+    console.log(i);
+}
+
+const numbers = [6, 7, 1, -10, 78, 18, -5, -38, 9];
+
+const num1 = numbers.map((number) => number * 2);
+
+console.log(num1);
+
+const num2 = numbers.forEach((number) => {
+        if (number > 0) {
+        console.log(number / 2);
+        }
+});
+
+let names = ["Семен", "Иван", "Петр", "Татьяна"];
+let ages = [18, 27, 74, 34];
+
+let combinedArray = [];
+
+for (let i = 0; i < names.length; i++) {
+    let name = names[i];
+    let age = ages[i];
+    let ageWord;
+
+    if (age % 10 >= 2 && age % 10 <= 4) {
+        ageWord = "года";
+    } else {
+        ageWord = "лет";
+    }
+
+    combinedArray.push(`${name} ${age} ${ageWord}`);
+}
+console.log(combinedArray);
+
+
+let originalArray = [1, 2, 3, 4, 5];
+
+let reversedArray = originalArray.reverse();
+
+console.log(reversedArray);
