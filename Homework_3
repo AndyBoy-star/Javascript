@@ -1,0 +1,68 @@
+1.
+
+function sum(a, b){
+    return  a + b;
+}
+
+console.log(sum(7, 8));
+
+2.
+
+function positiveNumbers(array) {
+    return array.filter (array => array > 0);
+}
+
+console.log(positiveNumbers([-5, 10, -12, 20, -7]));
+
+3.
+
+function maxNumber (a, b , c, d, e) {
+    return Math.max(a, b, c, d, e);
+};
+
+console.log(maxNumber(1, 2, 3, 4, 5));
+
+4.
+
+function maxNumberArray(array) {
+    return Math.max(...array);
+}
+
+console.log(maxNumberArray([4, 20, 77, 55, 38]));
+
+5.
+
+const num1 = (a, b) => a ** b;
+
+console.log(num1(4, 5));
+
+6.
+
+function together (arr1, arr2) {
+    return arr1.concat(arr2);
+}
+
+console.log(together([1,2,3,4,5], [6,7,8,9,10]));
+
+7.
+
+const positiveEven = (arr) => arr.filter(num => num > 0 && num %2 ===0);
+
+console.log(positiveEven([1, -2, 3, -6, 8, 10]));
+
+8.
+
+const maxLength = (str1, str2) => {
+    if (str1.length >= str2.length ) {
+        return str1;
+    } else return str2;
+}
+
+console.log(maxLength("Hello", "Panama"));
+
+9. 
+
+const upperCase = (str) => str.charAt(0).toUpperCase() + str.slice(1);
+
+console.log(upperCase("hello"));
+
