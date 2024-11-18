@@ -1,0 +1,111 @@
+Задание: Создание формы с использованием HTML------------------------------------------------------------------
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form action="" method="get">
+        <fieldset>
+            <legend>Основная информация</legend>
+            <label for="username">Имя пользователя:</label>
+            <input type="text" id="username" name="username" placeholder="Введите имя" required pattern="[A-Z,a-z] {3, }">
+
+            <label for="password">Пароль:</label>
+            <input type="password" id="password" name="password" placeholder="Введите пароль" required>
+
+            <label for="email">Электронная почта:</label>
+            <input type="email" id="email" name="email" placeholder="example@gmail.com" required>
+
+            <label for="age">Возраст:</label>
+            <input type="number" id="age" name="age" placeholder="Введите возраст" required>
+        </fieldset>
+
+        <fieldset>
+            <legend>Выбор параметров</legend>
+
+            <label for="subscribe">Подписаться на новости:</label>
+            <input type="checkbox" id="subsscribe" name="subscribe"  value="yes">
+
+            <label for="country">Страна:</label>
+            <select name="country" id="country" required>
+                <option value="">Выберите страну</option>
+                <option value="ru">Россия</option>
+                <option value="us">США</option>
+                <option value="uk">Великобритания</option>
+            </select>
+
+            <p>Выберите пол:</p>
+            <label for="male">Мужской</label>
+            <input type="radio"  id="male" name="gender" value="male" required/>
+            <label for="female">Женский</label>
+            <input type="radio" id="female" name="gender" value="female" required/>
+
+            <label for="city">Город:</label>
+            <input type="text" id="city" name="city" list="city-list" placeholder="Введите или выберите город">
+            <datalist id="city-list">
+                <option value="Москва"></option>
+                <option value="Санкт-Петербург"></option>
+                <option value="Сочи"></option>
+            </datalist>
+        </fieldset>
+
+        <fieldset>
+            <legend>Файлы и действия</legend>
+
+            <label for="avatar">Загрузить аватар:</label>
+            <input type="file" id="avatar" name="avatar" accept="image/*">
+
+            <input type="submit" value="Отправить">
+
+            <input type="reset" value="Сбросить">
+
+            <button type="button" onclick="alert('Это просто кнопка!')">Нажми меня</button>
+        </fieldset>
+    </form>
+  </body>
+</html>
+
+
+Работа с DOM в JavaScript-----------------------------------------------------------------------------------
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <script src="./script.js" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Работа с DOM</title>
+</head>
+<body>
+    <h1 id="main-title">Добро пожаловать!</h1>
+    <p class="text">Это первый абзац.</p>
+    <p class="text">Это второй абзац.</p>
+    <button id="change-title">Изменить заголовок</button>
+    <button id="add-paragraph">Добавить абзац</button>
+</body>
+</html>
+
+
+const main = document.getElementById("main-title");
+main.textContent = "Заголовок изменен с помощью JavaScript";
+
+const paragraphs = document.querySelectorAll(".text");
+paragraphs.forEach(paragraph => {
+    paragraph.style.color = "blue"
+});
+
+const btn = document.getElementById("change-title");
+btn.addEventListener("click", () => {
+    main.textContent = "Заголовок изменен по кнопке";
+});
+
+const btn2 = document.getElementById("add-paragraph");
+btn2.addEventListener("click", () => {
+    const newParagraph = document.createElement("p");
+    newParagraph.textContent = "Новый абзац добавлен.";
+    document.body.appendChild(newParagraph);
+});
