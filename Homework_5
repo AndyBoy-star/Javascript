@@ -1,0 +1,40 @@
+HTML------------------------------------------------
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Random Dog Image</title>
+</head>
+<body>
+  <h1>Random Dog Image</h1>
+  <img id="dogImage" alt="Random Dog" style="max-width: 100%; height: auto;">
+  <script src="script.js"></script>
+</body>
+</html>
+
+
+JS----------------------------------------------------
+
+const dogImage = document.getElementById('dogImage');
+
+function fetchRandomDogImage() {
+  const url = 'https://dog.ceo/api/breeds/image/random';
+  
+  fetch(url)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      return response.json();
+    })
+    .then(data => {
+      dogImage.src = data.message;
+    })
+    .catch(error => {
+      console.error('Ошибка при загрузке изображения:', error);
+    });
+}
+
+fetchRandomDogImage();
