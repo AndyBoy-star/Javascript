@@ -1,0 +1,83 @@
+HTML-----------------------------------------------------------
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="./style.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Погода вашего города</h1>
+    <div id="weather-container">Нажмите на кнопку, чтобы получить погоду</div>
+    <button onclick="updateWeather()">Обновить погоду</button>
+    <script src="./script.js"></script>
+  </body>
+</html>
+
+
+
+CSS-----------------------------------------------------------
+
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100px;
+    margin: 0;
+    background-color: #f0f8ff;
+}
+#weather-container {
+    text-align: center;
+    margin: 20px 0;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+}
+button:hover {
+    background-color: #0056b3;
+}
+
+
+
+JS----------------------------------------------------
+
+
+async function updateWeather() {
+    const city = "Dusseldorf"; 
+    const format = "?format=3";
+    const url = `https://wttr.in/${city}${format}`;
+
+    try {
+        const response = await fetch(url);
+        if (!response.ok) throw new Error("Ошибка при загрузке данных");
+
+        const weatherData = await response.text();
+        document.getElementById("weather-container").innerText = weatherData;
+    } catch (error) {
+        document.getElementById("weather-container").innerText = "Ошибка загрузки данных о погоде.";
+        console.error("Ошибка:", error);
+    }
+}
