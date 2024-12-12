@@ -1,0 +1,184 @@
+1---------------------------------------------------------------------------------
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="./script.js" defer></script>
+    <link rel="stylesheet" href="./style.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form id="imageForm">
+      <input type="url" id="imageUrl" placeholder="Enter image URL" required />
+      <button type="submit">Add Image</button>
+    </form>
+    <div class="imgs_container"></div>
+  </body>
+</html>
+
+.imgs_container img {
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
+    margin: 5px;
+}
+
+const imageForm = document.getElementById('imageForm');
+
+imageForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+
+    const imageUrl = document.getElementById('imageUrl').value;
+    console.log(imageUrl);
+
+    const imgContainer = document.querySelector('.imgs_container');
+    const img = document.createElement('img');
+    img.src = imageUrl;
+    img.alt = "User added image";
+
+    imgContainer.appendChild(img);
+
+    document.getElementById('imageUrl').value = '';
+});
+
+
+2-------------------------------------------------------------------------------
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="./script.js" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Form</title>
+</head>
+<body>
+    <form id="addNewStudentForm" onsubmit="Submit(event)">
+        <label for="firstname">First Name:</label>
+        <input type="text" id="firstname" name="firstname" required>
+        <br>
+
+        <label for="lastname">Last Name:</label>
+        <input type="text" id="lastname" name="lastname" required>
+        <br>
+
+        <label for="age">Age:</label>
+        <input type="number" id="age" name="age" required>
+        <br>
+
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
+
+function Submit(event) {
+  event.preventDefault();
+
+  const firstname = document.getElementById("firstname").value;
+  const lastname = document.getElementById("lastname").value;
+  const age = document.getElementById("age").value;
+
+  const student = {
+    firstname: firstname,
+    lastname: lastname,
+    age: age,
+    };
+
+  console.log(student);
+};
+
+
+3---------------------------------------------------------------------------
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="./script.js" defer></script>
+    <link rel="stylesheet" href="./style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Form</title>
+</head>
+<body>
+    <form id="addNewStudentForm" onsubmit="Submit(event)">
+        <label for="firstname">First Name:</label>
+        <input type="text" id="firstname" name="firstname" required>
+        <br>
+
+        <label for="lastname">Last Name:</label>
+        <input type="text" id="lastname" name="lastname" required>
+        <br>
+
+        <label for="age">Age:</label>
+        <input type="number" id="age" name="age" required>
+        <br>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <div id="studentContainer"></div>
+</body>
+</html>
+
+#studentContainer {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.student-card {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    text-align: center;
+}
+
+.student-card.young {
+    background-color: #ffe6e6;
+}
+
+const allStudents = [];
+
+function Submit(event) {
+    event.preventDefault();
+
+    const firstname = document.getElementById('firstname').value;
+    const lastname = document.getElementById('lastname').value;
+    const age = document.getElementById('age').value;
+
+    const student = {
+        firstname: firstname,
+        lastname: lastname,
+        age: parseInt(age, 10),
+    };
+
+    allStudents.push(student);
+    renderStudents(allStudents);
+}
+
+function renderStudents(students) {
+    const container = document.getElementById('studentContainer');
+    container.innerHTML = '';
+
+    students.forEach(student => {
+        const card = document.createElement('div');
+        card.className = 'student-card';
+        if (student.age < 18) {
+            card.classList.add('young');
+        }
+
+        const nameParagraph = document.createElement('p');
+        nameParagraph.textContent = `Name: ${student.firstname} ${student.lastname}`;
+
+        const ageParagraph = document.createElement('p');
+        ageParagraph.textContent = `Age: ${student.age}`;
+
+        card.appendChild(nameParagraph);
+        card.appendChild(ageParagraph);
+
+        container.appendChild(card);
+    });
+}
