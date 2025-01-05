@@ -1,0 +1,86 @@
+ProfileCard.jsx------------------------------------------------------------------------
+
+import React from 'react';
+import './ProfileCard.css';
+
+const ProfileCard = ({ avatar, name, occupation, hobbies }) => {
+    return (
+        <div className="profile-card">
+            <img src={avatar} alt="Profile Avatar" className="profile-avatar" />
+            <h2 className="profile-name">{name}</h2>
+            <p className="profile-occupation">{occupation}</p>
+            <p className="profile-hobbies">Hobbies: {hobbies}</p>
+        </div>
+    );
+};
+
+export default ProfileCard;
+
+
+App.jsx-------------------------------------------------------------------------------
+
+import React from 'react';
+import ProfileCard from './components/ProfileCard.jsx';
+
+const App = () => {
+    return (
+        <div>
+            <ProfileCard
+                avatar="https://img.freepik.com/premium-photo/portrait-lady-tiger-wearing-clothes-generative-ai_356060-4826.jpg"
+                name="Alice Johnson"
+                occupation="Software Developer"
+                hobbies="Reading, Coding, Hiking"
+            />
+            <ProfileCard
+                avatar="https://img.freepik.com/free-photo/view-3d-cool-modern-bird_23-2150946449.jpg"
+                name="Bob Smith"
+                occupation="Graphic Designer"
+                hobbies="Drawing, Traveling, Gaming"
+            />
+            <ProfileCard
+                avatar="https://img.freepik.com/free-photo/ferocious-tiger-studio_23-2150853183.jpg?w=360"
+                name="Charlie Brown"
+                occupation="Product Manager"
+                hobbies="Writing, Biking, Cooking"
+            />
+        </div>
+    );
+};
+
+export default App;
+
+
+ProfileCard.css------------------------------------------------------------------------
+
+.profile-card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 16px;
+    max-width: 300px;
+    text-align: center;
+    margin: 16px auto;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.profile-avatar {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    margin-bottom: 12px;
+}
+
+.profile-name {
+    font-size: 1.5rem;
+    margin: 8px 0;
+}
+
+.profile-occupation {
+    font-size: 1rem;
+    color: #555;
+}
+
+.profile-hobbies {
+    font-size: 0.9rem;
+    color: #777;
+}
