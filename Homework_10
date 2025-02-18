@@ -1,0 +1,76 @@
+document.addEventListener("DOMContentLoaded", function () {
+    const input = document.createElement("input");
+    input.placeholder = "Введите id продукта";
+    input.id = "productId";
+    
+    const button = document.createElement("button");
+    button.textContent = "Показать";
+    button.addEventListener("click", function () {
+        const productId = document.getElementById("productId").value;
+        if (productId) {
+            getProductByID(productId, renderProductCard);
+        }
+    });
+    
+    document.body.appendChild(input);
+    document.body.appendChild(button);
+    
+    const container = document.createElement("div");
+    container.id = "productContainer";
+    document.body.appendChild(container);
+});
+
+function getProductByID(id, callback) {
+    fetch(`https://dummyjson.com/products/${id}`)
+        .then(response => response.json())
+        .then(data => callback(data))
+        .catch(error => console.error("Ошибка загрузки данных", error));
+}
+
+function renderProductCard(product) {
+    const container = document.getElementById("productContainer");
+    container.innerHTML = ""; 
+    
+    const card = document.createElement("div");
+    card.style.border = "1px solid #ccc";
+    card.style.padding = "10px";
+    card.style.marginTop = "10px";
+    card.style.width = "300px";
+    card.style.backgroundColor = "#222";
+    card.style.color = "#fff";
+
+    const image = document.createElement("img");
+    image.src = product.thumbnail;
+    image.alt = product.title;
+    image.style.width = "100%";
+
+    const title = document.createElement("h3");
+    title.textContent = product.title;
+
+    const stock = document.createElement("p");
+    stock.textContent = `Stock: ${product.stock}`;
+
+    const price = document.createElement("p");
+    price.textContent = `Price: $${product.price}`;
+
+    const ratingAVG = document.createElement("p");
+    ratingAVG.textContent = `Rating AVG: ${calculateAverageRating(product.reviews || [])}`;
+
+    const category = document.createElement("p");
+    category.textContent = `Category: ${product.category}`;
+
+    card.appendChild(image);
+    card.appendChild(title);
+    card.appendChild(stock);
+    card.appendChild(price);
+    card.appendChild(ratingAVG);
+    card.appendChild(category);
+    
+    container.appendChild(card);
+}
+
+function calculateAverageRating(reviews) {
+    if (reviews.length === 0) return "No reviews";
+    const total = reviews.reduce((sum, review) => sum + review.rating, 0);
+    return (total / reviews.length).toFixed(1);
+}
