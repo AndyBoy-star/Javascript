@@ -1,0 +1,110 @@
+class Car {
+    constructor(mark, model, year) {
+      this.mark = mark;
+      this.model = model;
+      this.year = year;
+    }
+  
+    age() {
+      return new Date().getFullYear() - this.year;
+    }
+  }
+  
+  class Person {
+    constructor(name, email) {
+      this.name = name;
+      this.email = email;
+    }
+  
+    change_email(newEmail) {
+      if (newEmail.includes("@") && newEmail.includes(".")) {
+        this.email = newEmail;
+      } else {
+        throw new Error("Invalid email format");
+      }
+    }
+  }
+  
+  class Library {
+    static books = [];
+  
+    static addBook(book) {
+      this.books.push(book);
+    }
+  
+    static listBooks() {
+      console.log(this.books);
+    }
+  }
+  
+  class Rectangle {
+    #width;
+    #height;
+  
+    constructor(width, height) {
+      this.width = width;
+      this.height = height;
+    }
+  
+    get width() {
+      return this.#width;
+    }
+  
+    set width(value) {
+      if (value > 0) {
+        this.#width = value;
+      } else {
+        throw new Error("Width must be a positive number");
+      }
+    }
+  
+    get height() {
+      return this.#height;
+    }
+  
+    set height(value) {
+      if (value > 0) {
+        this.#height = value;
+      } else {
+        throw new Error("Height must be a positive number");
+      }
+    }
+  
+    area() {
+      return this.#width * this.#height;
+    }
+  }
+  
+  class BankAccount {
+    static accounts = [];
+    #balance;
+  
+    constructor(initialBalance = 0) {
+      this.#balance = initialBalance;
+      BankAccount.accounts.push(this);
+    }
+  
+    deposit(amount) {
+      if (amount > 0) {
+        this.#balance += amount;
+      } else {
+        throw new Error("Deposit amount must be positive");
+      }
+    }
+  
+    withdraw(amount) {
+      if (amount > this.#balance) {
+        throw new Error("Insufficient funds");
+      }
+      this.#balance -= amount;
+    }
+  
+    get balance() {
+      return this.#balance;
+    }
+  
+    static totalBalance() {
+      return this.accounts.reduce((sum, account) => sum + account.balance, 0);
+    }
+  }
+  
