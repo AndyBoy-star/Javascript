@@ -1,0 +1,26 @@
+const closeModalButton = document.querySelector(".close-modal");
+const modalOverlay = document.querySelector(".modal-window");
+const galleryThumbs = document.querySelector(".gallery-thumbs");
+
+function closeModal() {
+  modalOverlay.classList.remove("open");
+}
+
+closeModalButton.addEventListener("click", closeModal);
+
+modalOverlay.addEventListener("click", function (event) {
+  if (event.target === modalOverlay) {
+    closeModal();
+  }
+});
+
+function updateMainImage(event) {
+  const newSrc = event.target.src;
+  document.querySelector(".gallery-main img").src = newSrc;
+}
+
+galleryThumbs.addEventListener("click", function (event) {
+  if (event.target.classList.contains("gallery-thumb")) {
+    updateMainImage(event);
+  }
+});
